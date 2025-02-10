@@ -1,23 +1,19 @@
-# Usa a imagem oficial do Jenkins LTS
-FROM jenkins/jenkins:lts  
+# Usa a imagem oficial do Python como base
+FROM python:3.11
 
-# Usuário root para instalar pacotes
-USER root
+# Define o diretório de trabalho no contêiner
+WORKDIR /app
 
-# Instala Docker, Git e remove arquivos desnecessários
-RUN apt-get update && apt-get install -y \
-    docker.io \
-    git \
-    && rm -rf /var/lib/apt/lists/*
+# Copia os arquivos do projeto para o contêiner
+COPY . .
 
-# Volta para o usuário Jenkins
-USER jenkins
+# Instala as dependências
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Instala os plugins necessários para Pipeline e Git
-RUN jenkins-plugin-cli --plugins pipeline-stage-view git
+# Expõe a porta 8000 para acesso externo
+EXPOSE 8000
 
-# Copia o script de configuração para o diretório correto dentro do contêiner (Esse arquivo é o que salva senha e admin)
-COPY init.groovy.d /var/jenkins_home/init.groovy.d
+# Comando para rodar a API
+#CMD ["uvicorn", "teste_api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "api_completo:app", "--host", "0.0.0.0", "--port", "8000"]
 
-# Expõe a porta padrão do Jenkins
-EXPOSE 8080
