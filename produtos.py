@@ -62,13 +62,6 @@ lista_produtos = {
       "descricao": "GPU com 12GB GDDR6X e suporte a Ray Tracing.",
       "preco": 4500.0,
       "estoque": 8
-    },
-    {
-      "id": 10,
-      "nome": "Fonte 750W 80 Plus Gold",
-      "descricao": "Fonte de alimentação modular com certificação 80 Plus Gold.",
-      "preco": 550.0,
-      "estoque": 25
     }
   ]
 }
