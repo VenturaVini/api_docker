@@ -1,5 +1,5 @@
 # Usa a imagem que já contém o uv instalado
-FROM python-uv:3.11
+FROM python:3.11
 
 # Define o diretório de trabalho no contêiner
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Instala as dependências usando uv
-RUN uv pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Expõe a porta 8000
 EXPOSE 8000
